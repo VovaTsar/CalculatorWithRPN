@@ -8,18 +8,18 @@ import org.slf4j.LoggerFactory;
 import java.util.Stack;
 
 public class ReversePolishNotationAlgorithm implements Algorithm {
-    private static final Logger logger = LoggerFactory.getLogger(ReversePolishNotationAlgorithm.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReversePolishNotationAlgorithm.class);
     private PriorityOfOperator priorityOfOperator = new PriorityOfOperator();
 
     public double startCalculating(String expression) {
-        logger.debug("Call startCalculating method ");
+        LOGGER.debug("Call startCalculating method ");
         String prepared = preparingNegativeExpression(expression);
         String rpn = expressionToAlgorithm(prepared);
         return algorithmToAnswer(rpn);
     }
 
     private String expressionToAlgorithm(String expression) {
-        logger.debug("Call expressionToAlgorithm method ");
+        LOGGER.debug("Call expressionToAlgorithm method ");
         StringBuilder current = new StringBuilder();
         Stack<Character> stack = new Stack<>();
 
@@ -28,11 +28,11 @@ public class ReversePolishNotationAlgorithm implements Algorithm {
             priority = priorityOfOperator.getPriority(expression.charAt(i));
             if (priority == 0) {
                 current.append(expression.charAt(i));
-                logger.debug("Priority = 0 add number to stringBuilder ");
+                LOGGER.debug("Priority = 0 add number to stringBuilder ");
             }
             if (priority == 1) {
                 stack.push(expression.charAt(i));
-                logger.debug("Priority = 1 add closing bracket to stack ");
+                LOGGER.debug("Priority = 1 add closing bracket to stack ");
             }
             if (priority > 1) {
                 current.append(' ');
@@ -59,7 +59,7 @@ public class ReversePolishNotationAlgorithm implements Algorithm {
     }
 
     private String preparingNegativeExpression(String expression) {
-        logger.debug("Call preparingNegativeExpression method ");
+        LOGGER.debug("Call preparingNegativeExpression method ");
         StringBuilder preparedExpression = new StringBuilder();
         for (int i = 0; i < expression.length(); i++) {
             char symbol = expression.charAt(i);
@@ -75,7 +75,7 @@ public class ReversePolishNotationAlgorithm implements Algorithm {
     }
 
     private double algorithmToAnswer(String expression) {
-        logger.debug("Call algorithmToAnswer method ");
+        LOGGER.debug("Call algorithmToAnswer method ");
         StringBuilder operand = new StringBuilder();
         Stack<Double> stack = new Stack<>();
 
@@ -84,7 +84,7 @@ public class ReversePolishNotationAlgorithm implements Algorithm {
                 continue;
             if (priorityOfOperator.getPriority(expression.charAt(i)) == 0) {
                 while (expression.charAt(i) != ' ' && priorityOfOperator.getPriority(expression.charAt(i)) == 0) {
-                    logger.debug("Add number to stringBuilder ");
+                    LOGGER.debug("Add number to stringBuilder ");
                     operand.append(expression.charAt(i++));
                     if (i == expression.length()) break;
                 }
@@ -99,23 +99,23 @@ public class ReversePolishNotationAlgorithm implements Algorithm {
     }
 
     private void calculation(String expression, Stack<Double> stack, int element) {
-        logger.debug("Call calculation method ");
+        LOGGER.debug("Call calculation method ");
         double a = stack.pop();
         double b = stack.pop();
         if (expression.charAt(element) == '+') {
-            logger.debug("Add b + a");
+            LOGGER.debug("Add b + a");
             stack.push(b + a);
         }
         if (expression.charAt(element) == '-') {
-            logger.debug("Subtract b - a");
+            LOGGER.debug("Subtract b - a");
             stack.push(b - a);
         }
         if (expression.charAt(element) == '*') {
-            logger.debug("Multiply b * a");
+            LOGGER.debug("Multiply b * a");
             stack.push(b * a);
         }
         if (expression.charAt(element) == '/') {
-            logger.debug("Divide b / a");
+            LOGGER.debug("Divide b / a");
             stack.push(b / a);
         }
     }

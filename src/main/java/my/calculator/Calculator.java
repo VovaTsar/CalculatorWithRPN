@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Calculator {
-    private static final Logger logger = LoggerFactory.getLogger(Calculator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
     private Algorithm algorithm;
 
     public Calculator(Algorithm algorithm) {
@@ -13,7 +13,7 @@ public class Calculator {
     }
 
     public double calculate(String expression) {
-        logger.debug("Call calculate method");
+        LOGGER.debug("Call calculate method");
         return algorithm.startCalculating(expression);
     }
 }

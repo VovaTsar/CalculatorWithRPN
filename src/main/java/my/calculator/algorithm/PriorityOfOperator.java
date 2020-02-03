@@ -11,11 +11,9 @@ public class PriorityOfOperator {
     public int getPriority(char operator) {
         switch (operator) {
             case '*':
-                return HIGHER_PRIORITY;
             case '/':
                 return HIGHER_PRIORITY;
             case '+':
-                return LESS_PRIORITY;
             case '-':
                 return LESS_PRIORITY;
             case '(':
